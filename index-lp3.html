@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal do Cliente para Social Media – Assinatura Mensal</title>
+  <meta name="description" content="Calendário editorial com aprovações, envio de materiais e mensagens em um único portal com sua marca. Onboarding em até 48h.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#090B13;--text:#F8FAFF;--muted:#C7D2EA;--card:#0F1423;--border:rgba(255,255,255,.12);--g1:#a78bfa;--g2:#22d3ee;--radius:16px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(1200px 800px at 100% -10%,rgba(167,139,250,.12),transparent),radial-gradient(1000px 700px at 0% 0%,rgba(34,211,238,.12),transparent),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:50;padding:14px 0;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(9,11,19,.85),rgba(9,11,19,.65));backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--g1),var(--g2))}
+    nav{display:flex;gap:16px;flex-wrap:wrap}
+    nav a{color:#E6EDFF;text-decoration:none;opacity:.85;font-weight:600;padding:8px 10px;border-radius:8px}
+    nav a:hover{opacity:1}
+    nav a:focus{outline:2px solid #fff;outline-offset:2px;border-radius:6px}
+    .hero{padding:84px 0 32px;text-align:center}
+    h1{font-size:42px;margin:0}
+    .grad{-webkit-text-fill-color:transparent;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text}
+    .lead{color:var(--muted);max-width:800px;margin:14px auto 20px}
+    .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{padding:16px 22px;border-radius:12px;font-weight:800;border:1px solid var(--border);backdrop-filter:blur(6px);transition:.2s ease}
+    .btn-primary{background:linear-gradient(90deg,var(--g1),var(--g2));color:#0a0d14;border-color:transparent;box-shadow:0 8px 24px rgba(34,211,238,.18)}
+    .btn-primary:hover{transform:translateY(-1px);filter:saturate(1.1)}
+    .btn-ghost{background:rgba(255,255,255,.05);color:var(--text)}
+    .btn-ghost:hover{background:rgba(255,255,255,.08)}
+    .section{padding:48px 0}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 8px 24px rgba(0,0,0,.25)}
+    .list{list-style:none;margin:0;padding:0;display:grid;gap:10px;color:var(--muted)}
+    .check{color:#86efac}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:12px;color:var(--muted)}
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+    .price{font-size:32px;margin:10px 0}
+    .flag{position:absolute;top:16px;right:16px;background:linear-gradient(90deg,var(--g1),var(--g2));color:#0a0d14;padding:6px 10px;border-radius:999px;font-size:12px}
+    .price-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:360px}
+    .price-card.featured{border-color:rgba(255,255,255,.22);box-shadow:0 18px 40px rgba(34,211,238,.12),0 0 0 1px rgba(255,255,255,.06) inset}
+    .price-card .btn{align-self:flex-start}
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    /* Demo (vídeo + slider aprimorado) */
+    .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+    .video-frame{position:relative;width:100%;padding-top:56.25%;border:1px solid var(--border);border-radius:var(--radius);background:rgba(255,255,255,.02)}
+    .video-frame-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+    .slider{position:relative;border:1px solid var(--border);border-radius:var(--radius);background:rgba(255,255,255,.02);overflow:hidden}
+    .slides{display:flex;gap:0;overflow:hidden;scroll-behavior:smooth;touch-action:pan-y pinch-zoom}
+    .slide{min-width:100%;aspect-ratio:16/9;background:#0f1423}
+    .slide img{display:block;width:100%;height:100%;object-fit:cover}
+    .slider-nav{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+    .nav-btn{pointer-events:auto;background:rgba(10,13,20,.7);border:1px solid var(--border);width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;cursor:pointer;margin:8px;backdrop-filter:blur(4px)}
+    .dots{position:absolute;left:0;right:0;bottom:8px;display:flex;gap:6px;justify-content:center}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid var(--border);cursor:pointer}
+    .dot.active{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+    .thumbs{display:flex;gap:10px;margin-top:12px;overflow:auto;padding-bottom:6px}
+    .thumbs img{width:168px;height:96px;object-fit:cover;border-radius:10px;border:1px solid var(--border);opacity:1;cursor:pointer;transition:.2s ease}
+    .thumbs img:hover{transform:translateY(-1px)}
+    .thumbs img.active{outline:2px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+    /* Galeria adicional responsiva */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .gallery img{width:100%;height:240px;object-fit:cover;border-radius:14px;border:1px solid var(--border);box-shadow:0 10px 28px rgba(0,0,0,.35)}
+    .gallery img:hover{outline:2px solid #fff}
+    /* Responsividade */
+    @media(max-width:1024px){.container{max-width:960px}}
+    @media(max-width:980px){.grid-3,.pricing,.faq,.demo-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){
+      h1{font-size:30px}
+      .lead{font-size:15px;color:#D7E0F6}
+      .container{padding:0 16px}
+      .section{padding:36px 0}
+      .cta{gap:10px}
+      .cta .btn{width:100%}
+      .price-card{min-height:0}
+      .thumbs img{width:132px;height:74px}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .gallery img{height:180px}
+      nav{gap:8px}
+      nav a{font-size:14px;padding:6px 8px}
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="logo"><div class="logo-badge"></div><strong>Portal do Cliente – Social Media</strong></div>
+    <nav><a href="#como">Como usar</a><a href="#demo">Demo</a><a href="#planos">Planos</a><a href="#faq">FAQ</a></nav>
+  </header>
+
+  <section class="hero container">
+    <h1>Seu calendário editorial com <span class="grad">aprovação linda e sem atrito</span>.</h1>
+    <p class="lead">Chega de arte em 15 versões no WhatsApp. O cliente recebe, aprova ou pede ajustes, e você segue o fluxo. Tudo com sua marca, hospedado e pronto em 48h.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#planos">Assinar agora</a>
+      <a class="btn btn-ghost" href="#beneficios">Ver benefícios</a>
+    </div>
+  </section>
+
+  <section id="beneficios" class="section container">
+    <div class="grid-3">
+      <div class="card"><span class="pill">Profissionalismo</span><h3>Portal com sua marca</h3><p class="list">Impressão de agência grande desde o onboarding do cliente.</p></div>
+      <div class="card"><span class="pill">Agilidade</span><h3>Aprovação em 1 clique</h3><p class="list">Status claro: Pendente, Aprovado, Ajustes. Tudo registrado.</p></div>
+      <div class="card"><span class="pill">Organização</span><h3>Arquivos e links</h3><p class="list">Nada se perde. Conteúdos e referências ficam organizados por cliente.</p></div>
+    </div>
+  </section>
+
+  <section id="demo" class="section container" aria-label="Demonstração">
+    <h2>Demonstração e exemplos</h2>
+    <div class="demo-grid">
+      <div class="video-frame" role="region" aria-label="Vídeo de demonstração">
+        <!-- Substitua este bloco por um iframe do YouTube/Vimeo -->
+        <div class="video-frame-inner">Vídeo: cole aqui o link do YouTube/Vimeo</div>
+      </div>
+      <div class="slider" aria-roledescription="carousel" aria-label="Slides de exemplo">
+        <div class="slides" id="slides">
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3"><img loading="eager" decoding="sync" src="img/entrar.png" alt="Exemplo 1"></div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3"><img loading="eager" decoding="sync" src="img/iniciar.png" alt="Exemplo 2"></div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3"><img loading="eager" decoding="sync" src="img/aprov.png" alt="Exemplo 3"></div>
+        </div>
+        <div class="slider-nav" aria-hidden="false">
+          <button class="nav-btn" id="prev" aria-label="Anterior">‹</button>
+          <button class="nav-btn" id="next" aria-label="Próximo">›</button>
+        </div>
+        <div class="dots" id="dots" aria-hidden="false"></div>
+        <div class="thumbs" id="thumbs" aria-label="Miniaturas">
+          <img loading="lazy" src="img/entrar.png" data-index="0" alt="Miniatura 1" class="active">
+          <img loading="lazy" src="img/iniciar.png" data-index="1" alt="Miniatura 2">
+          <img loading="lazy" src="img/aprov.png" data-index="2" alt="Miniatura 3">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" aria-label="Galeria adicional">
+    <h2>Mais exemplos de telas</h2>
+    <div class="gallery">
+      <img loading="lazy" src="img/perfil.png" alt="Perfil do Cliente">
+      <img loading="lazy" src="img/msg.png" alt="Mensagens">
+      <img loading="lazy" src="img/pend.png" alt="Aprovações">
+    </div>
+  </section>
+
+  <section id="como" class="section container">
+    <h2>Como você usa com o cliente</h2>
+    <div class="grid-3">
+      <div class="card"><h3>1) Onboarding</h3><ul class="list"><li>Você envia logo e cores</li><li>Nós publicamos seu portal</li><li>Cliente recebe acesso</li></ul></div>
+      <div class="card"><h3>2) Conteúdos</h3><ul class="list"><li>Você envia as peças do mês</li><li>Cliente aprova ou pede ajustes</li><li>Feedbacks ficam salvos</li></ul></div>
+      <div class="card"><h3>3) Rotina</h3><ul class="list"><li>Mensagens centralizadas</li><li>Status do que está em produção</li><li>Biblioteca por cliente</li></ul></div>
+    </div>
+  </section>
+
+  <section id="planos" class="section container">
+    <h2>Assinatura mensal</h2>
+    <p class="list" style="margin:6px 0 18px;color:var(--muted)">Sem fidelidade. Migre de plano quando precisar.</p>
+    <div class="pricing">
+      <div class="card price-card">
+        <div class="flag">Comece certo</div>
+        <h3>Starter</h3>
+        <p class="price">R$ 219/mês</p>
+        <ul class="list">
+          <li>Até 15 clientes</li>
+          <li>Portal personalizado</li>
+          <li>Aprovação + Mensagens</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Assinar Starter</a>
+      </div>
+      <div class="card price-card featured">
+        <div class="flag">Mais vendido</div>
+        <h3>Pro</h3>
+        <p class="price">R$ 399/mês</p>
+        <ul class="list">
+          <li>Até 40 clientes</li>
+          <li>Biblioteca por cliente</li>
+          <li>Suporte prioritário</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Assinar Pro</a>
+      </div>
+      <div class="card price-card">
+        <div class="flag">Para agências</div>
+        <h3>Studio</h3>
+        <p class="price">R$ 699/mês</p>
+        <ul class="list">
+          <li>Clientes ilimitados</li>
+          <li>Onboarding assistido</li>
+          <li>Treinamento da equipe</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Assinar Studio</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section container">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <div class="card"><strong>Em quanto tempo fica pronto?</strong><p class="list">Até 48h depois de recebermos suas informações.</p></div>
+      <div class="card"><strong>Quem mantém o portal?</strong><p class="list">Nós hospedamos e mantemos. Você usa no dia a dia.</p></div>
+      <div class="card"><strong>Posso cancelar quando quiser?</strong><p class="list">Sim. A cobrança é mensal e sem fidelidade.</p></div>
+      <div class="card"><strong>É personalizado?</strong><p class="list">Sim: logo, cores e domínio (opcional) para sua marca.</p></div>
+      <div class="card"><strong>Como funciona a cobrança?</strong><p class="list">Cartão mensal com renovação automática. Nota fiscal disponível.</p></div>
+      <div class="card"><strong>Há suporte?</strong><p class="list">Atendimento por e-mail e WhatsApp em horário comercial (Pro e Studio prioritário).</p></div>
+    </div>
+  </section>
+
+  <section class="section container" aria-label="Chamada final">
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>
+        <h3 style="margin:0 0 6px">Pronto para profissionalizar o relacionamento com seus clientes?</h3>
+        <p class="list" style="margin:0;color:var(--muted)">Onboarding em até 48h, sem fidelidade. Migre de plano quando quiser.</p>
+      </div>
+      <a class="btn btn-primary" href="#planos">Começar agora</a>
+    </div>
+  </section>
+
+  <footer>
+  </footer>
+
+  <script>
+    // Carousel: teclas, dots, thumbs, swipe e autoplay opcional
+    (function(){
+      const track=document.getElementById('slides');
+      if(!track) return;
+      const slides=[...track.children];
+      const prev=document.getElementById('prev');
+      const next=document.getElementById('next');
+      const dotsC=document.getElementById('dots');
+      const thumbs=document.getElementById('thumbs');
+      let index=0; let allow=true; const DUR=3500; let autoplay; let isDown=false; let startX=0; let deltaX=0;
+
+      const goTo=(i)=>{
+        index=(i+slides.length)%slides.length;
+        track.scrollTo({left:index*track.clientWidth,behavior:'smooth'});
+        updateUI();
+      };
+      const updateUI=()=>{
+        if(dotsC){[...dotsC.children].forEach((d,di)=>d.classList.toggle('active',di===index));}
+        if(thumbs){[...thumbs.querySelectorAll('img')].forEach((t,ti)=>t.classList.toggle('active',ti===index));}
+      };
+      const buildDots=()=>{
+        if(!dotsC) return;
+        dotsC.innerHTML='';
+        slides.forEach((_,i)=>{
+          const b=document.createElement('button'); b.className='dot'+(i===0?' active':''); b.setAttribute('aria-label','Ir ao slide '+(i+1));
+          b.addEventListener('click',()=>goTo(i)); dotsC.appendChild(b);
+        });
+      };
+      const bindThumbs=()=>{
+        if(!thumbs) return; [...thumbs.querySelectorAll('img')].forEach(img=>img.addEventListener('click',()=>goTo(+img.dataset.index)));
+      };
+      const onResize=()=>{ goTo(index); };
+      const onKey=(e)=>{ if(e.key==='ArrowLeft') goTo(index-1); if(e.key==='ArrowRight') goTo(index+1); };
+      const startAuto=()=>{ stopAuto(); autoplay=setInterval(()=>goTo(index+1),DUR); };
+      const stopAuto=()=>{ if(autoplay) clearInterval(autoplay); };
+
+      // mouse/touch swipe
+      track.addEventListener('pointerdown',(e)=>{ isDown=true; startX=e.clientX; stopAuto(); track.style.scrollBehavior='auto'; });
+      window.addEventListener('pointerup',()=>{ if(!isDown) return; isDown=false; track.style.scrollBehavior='smooth'; if(Math.abs(deltaX)>40){ if(deltaX<0) goTo(index+1); else goTo(index-1);} startAuto(); deltaX=0; });
+      track.addEventListener('pointermove',(e)=>{ if(!isDown) return; deltaX=e.clientX-startX; track.scrollLeft=index*track.clientWidth - deltaX; });
+
+      prev && prev.addEventListener('click',()=>goTo(index-1));
+      next && next.addEventListener('click',()=>goTo(index+1));
+      window.addEventListener('resize',onResize);
+      window.addEventListener('keydown',onKey);
+
+      buildDots();
+      bindThumbs();
+      goTo(0);
+      startAuto();
+    })();
+  </script>
+</body>
+</html>
